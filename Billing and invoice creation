@@ -1,0 +1,84 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class Product {
+    private String name;
+    private double price;
+
+    // Constructor
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    // Getters
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+class Invoice {
+    private List<Product> products;
+    private List<Integer> quantities;
+    
+    // Constructor
+    public Invoice() {
+        products = new ArrayList<>();
+        quantities = new ArrayList<>();
+    }
+
+    // Add product to the invoice
+    public void addProduct(Product product, int quantity) {
+        products.add(product);
+        quantities.add(quantity);
+    }
+
+    // Calculate total price for the invoice
+    public double calculateTotal() {
+        double total = 0;
+        for (int i = 0; i < products.size(); i++) {
+            total += products.get(i).getPrice() * quantities.get(i);
+        }
+        return total;
+    }
+
+    // Print invoice details
+    public void printInvoice() {
+        System.out.println("---------- Invoice ----------");
+        for (int i = 0; i < products.size(); i++) {
+            System.out.println(products.get(i).getName() + " x " + quantities.get(i) + " = $" + (products.get(i).getPrice() * quantities.get(i)));
+        }
+        System.out.println("----------------------------");
+        System.out.println("Total: $" + calculateTotal());
+        System.out.println("----------------------------");
+    }
+}
+
+class BillingSystem {
+    private List<Product> availableProducts;
+
+    // Constructor
+    public BillingSystem() {
+        availableProducts = new ArrayList<>();
+        // Add some example products to the system
+        availableProducts.add(new Product("Laptop", 1000.00));
+        availableProducts.add(new Product("Smartphone", 500.00));
+        availableProducts.add(new Product("Headphones", 100.00));
+        availableProducts.add(new Product("Keyboard", 50.00));
+    }
+
+    // Show available products
+    public void showAvailableProducts() {
+        System.out.println("Available Products:");
+        for (int i = 0; i < availableProducts.size(); i++) {
+            Product product = availableProducts.get(i);
+            System.out.println(i + 1 + ". " + product.getName() + " - $" + product.getPrice());
+        }
+    }
+
+    // Create a new in
